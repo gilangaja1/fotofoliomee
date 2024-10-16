@@ -30,11 +30,12 @@ body, html {
 }
 
 /* Navbar styles */
-/* Styles for Navbar */
 #navbar {
     background-color: #333;
     color: #fff;
     padding: 10px 0;
+    position: relative;
+    z-index: 1000;
 }
 
 #navbar .container {
@@ -55,35 +56,64 @@ body, html {
     font-size: 16px;
 }
 
-#nav-links.active {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: #333;
-    position: absolute;
-    top: 60px; /* Sesuaikan dengan tinggi navbar */
-    left: 0;
-    padding: 10px 0;
-}
-
 #burger-menu {
     display: none;
     font-size: 24px;
     cursor: pointer;
+    color: #fff;
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+    #navbar {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: var(--dark-color);
+        padding: 10px 20px;
+    }
+
+    #navbar .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     #nav-links {
         display: none;
         flex-direction: column;
         width: 100%;
+        background-color: var(--dark-color);
+        position: absolute;
+        top: 60px; /* Sesuaikan dengan tinggi navbar */
+        left: 0;
+        padding: 10px 0;
     }
+
     #nav-links.active {
         display: flex;
     }
+
+    #nav-links li {
+        width: 100%;
+        margin: 0;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    #nav-links li a {
+        display: block;
+        padding: 10px 20px;
+    }
+
     #burger-menu {
         display: block;
+        font-size: 30px;
+    }
+
+    body {
+        padding-top: 60px; /* Sesuaikan dengan tinggi navbar */
     }
 }
 
@@ -92,7 +122,7 @@ body, html {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: #fff;
     text-align: center;
-    padding: 150px 0 100px;
+    padding: 150px 20px 100px;
     position: relative;
     overflow: hidden;
 }
@@ -109,7 +139,7 @@ body, html {
 
 /* Section styles */
 .section {
-    padding: 80px 0;
+    padding: 80px 20px;
 }
 
 .section h2 {
@@ -124,11 +154,13 @@ body, html {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .about-img {
     flex: 1;
     margin-right: 40px;
+    min-width: 250px;
 }
 
 .about-img img {
@@ -139,6 +171,7 @@ body, html {
 
 .about-text {
     flex: 1;
+    min-width: 250px;
 }
 
 /* Skills section */
@@ -205,11 +238,14 @@ body, html {
 .contact-info {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     margin-bottom: 40px;
 }
 
 .contact-item {
     text-align: center;
+    flex: 1;
+    min-width: 150px;
 }
 
 .contact-item i {
@@ -300,68 +336,30 @@ footer {
     opacity: 0.1;
 }
 
-/* Untuk layar lebih kecil dari 768px */
+/* Responsive Adjustments for Flex and Grid Layouts */
 @media (max-width: 768px) {
-    #navbar {
-        position: fixed;
-        width: 100%;
-        top: 0;
-        left: 0;
-        background-color: var(--dark-color);
-        z-index: 1000;
-        transition: all 0.3s ease;
-    }
-
-    /* Gaya untuk container navbar */
-    #navbar .container {
+    .about-info {
         flex-direction: column;
-        align-items: flex-start;
-        padding: 10px;
+        align-items: center;
     }
 
-    /* Sembunyikan menu pada layar kecil secara default */
-    #navbar ul {
-        display: none;
+    .about-img,
+    .about-text {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .skills-grid,
+    .project-grid,
+    .contact-info {
+        grid-template-columns: 1fr;
         flex-direction: column;
+        align-items: center;
+    }
+
+    .skill-item,
+    .project-card,
+    .contact-item {
         width: 100%;
     }
-
-    /* Gaya untuk item menu di dalam ul */
-    #navbar ul li {
-        width: 100%;
-        margin: 0;
-        text-align: left;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    #navbar ul li a {
-        display: block;
-        padding: 10px 20px;
-    }
-
-    /* Tampilkan menu ketika tombol burger diklik */
-    #navbar ul.show {
-        display: flex;
-    }
-
-    /* Tambahkan gaya untuk tombol hamburger */
-    #burger-menu {
-        display: block;
-        cursor: pointer;
-        color: white;
-        font-size: 30px;
-    }
-
-    /* Tambahkan padding untuk konten agar tidak tertutup navbar */
-    body {
-        padding-top: 80px;
-    }
-}
-
-/* Tombol hamburger default di desktop disembunyikan */
-#burger-menu {
-    display: none;
-}
-html {
-    scroll-behavior: smooth;
 }
