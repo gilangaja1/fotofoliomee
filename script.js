@@ -22,13 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Burger Menu Toggle
+    // Burger Menu Toggle (Improved for Mobile)
     const burgerMenu = document.getElementById('burger-menu');
     const navLinks = document.getElementById('nav-links');
     
     if (burgerMenu && navLinks) {
         burgerMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            // Add smooth slide-in animation for mobile
+            gsap.fromTo(navLinks, { x: '-100%' }, { x: '0%', duration: 0.5, ease: 'power2.inOut' });
         });
 
         navLinks.querySelectorAll('a').forEach(link => {
@@ -57,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
     
-    // Display Projects
+    // Display Projects (Swipe for Mobile)
     function displayProjects() {
         const projectList = document.getElementById('project-list');
         if (!projectList) return;
@@ -74,6 +76,28 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             projectList.appendChild(card);
         });
+
+        // Implement swipe functionality for mobile devices
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        projectList.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        projectList.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // Minimum swipe distance
+            if (touchEndX < touchStartX - swipeThreshold) {
+                projectList.scrollLeft += 300; // Swipe left
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                projectList.scrollLeft -= 300; // Swipe right
+            }
+        }
     }
 
     // Create Floating Shapes
@@ -96,18 +120,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Animate Navbar Scroll
+    // Animate Navbar Scroll (Sticky Navbar for Mobile)
     function handleNavbarScroll() {
         const navbar = document.getElementById('navbar');
         if (!navbar) return;
 
         if (window.scrollY > 100) {
             navbar.style.backgroundColor = 'rgba(44, 62, 80, 0.9)';
+            navbar.classList.add('sticky');
         } else {
             navbar.style.backgroundColor = 'var(--dark-color)';
+            navbar.classList.remove('sticky');
         }
     }
-    
+
     // Scroll to Top Button
     function handleScrollToTop() {
         const scrollTopBtn = document.getElementById('scrollTopBtn');
@@ -148,10 +174,13 @@ document.addEventListener('DOMContentLoaded', () => {
     displayProjects();
     createFloatingShapes();
 
-    // GSAP Animations
+    // GSAP Animations (Optimized for Mobile)
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
-    
+
+        // Mobile-specific animations
+        const isMobile = window.innerWidth <= 768;
+
         // Header Animation
         gsap.from('#header h1, #header p, #header .btn', {
             opacity: 0,
@@ -168,38 +197,30 @@ document.addEventListener('DOMContentLoaded', () => {
             stagger: 0.3,
             scrollTrigger: {
                 trigger: '.section',
-                start: 'top 80%'
+                start: 'top 80%',
+                markers: false,  // Disable scroll markers for a cleaner experience
+                onEnter: () => console.log("Section entered"),
+                once: true  // Only trigger once for mobile performance
             }
         });
 
         // Project Card Animations
         gsap.from('.project-card', {
             opacity: 0,
-            scale: 0.8,
+            scale: isMobile ? 0.9 : 0.8,  // Slightly larger on mobile for smoother performance
             duration: 0.5,
             stagger: 0.2,
             scrollTrigger: {
                 trigger: '#projects',
-                start: 'top 80%'
+                start: 'top 80%',
+                once: true
             }
         });
 
-        // Skill Item Animations
-        gsap.from('.skill-item', {
-            opacity: 0,
-            scale: 0.8,
-            duration: 0.5,
-            stagger: 0.1,
-            scrollTrigger: {
-                trigger: '#skills',
-                start: 'top 80%'
-            }
-        });
-
-        // Floating Shape Animations
+        // Floating Shape Animations (Mobile-friendly)
         gsap.to('.shape', {
-            y: 'random(-20, 20)',
-            x: 'random(-20, 20)',
+            y: 'random(-10, 10)',  // Reduced movement for mobile performance
+            x: 'random(-10, 10)',
             rotation: 'random(-15, 15)',
             duration: 'random(3, 5)',
             repeat: -1,
@@ -209,25 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 amount: 2,
                 from: 'random'
             }
-        });
-
-        // Adding Hover Effects
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                gsap.to(card, { scale: 1.05, duration: 0.3 });
-            });
-            card.addEventListener('mouseleave', () => {
-                gsap.to(card, { scale: 1, duration: 0.3 });
-            });
-        });
-
-        document.querySelectorAll('.skill-item').forEach(skill => {
-            skill.addEventListener('mouseenter', () => {
-                gsap.to(skill, { scale: 1.05, duration: 0.3 });
-            });
-            skill.addEventListener('mouseleave', () => {
-                gsap.to(skill, { scale: 1, duration: 0.3 });
-            });
         });
     } else {
         console.warn('GSAP atau ScrollTrigger tidak terdeteksi. Animasi tidak akan dijalankan.');
