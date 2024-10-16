@@ -16,6 +16,24 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Arahkan ke WhatsApp
             window.open(whatsappURL, '_blank');
+
+              // Burger Menu Toggle
+    const burgerMenu = document.getElementById('burger-menu');
+    const navLinks = document.getElementById('nav-links');
+
+    if (burgerMenu && navLinks) {
+        // Event listener untuk klik tombol burger menu
+        burgerMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('show'); // Toggle kelas 'show' untuk menampilkan/menyembunyikan menu
+        });
+
+        // Event listener untuk klik pada tautan di menu (untuk menutup menu setelah klik)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('show');
+            });
+        });
+    }
         });
     }
 });
@@ -176,4 +194,22 @@ document.addEventListener('DOMContentLoaded', () => {
             from: 'random'
         }
     });
+
+    // Tambahkan di sini kode burger menu
+    const burgerMenu = document.getElementById('burger-menu');
+    const navLinks = document.getElementById('nav-links');
+
+    if (burgerMenu && navLinks) {
+        // Event listener untuk klik tombol burger menu
+        burgerMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('show'); // Toggle class untuk menampilkan atau menyembunyikan menu
+        });
+
+        // Event listener untuk klik pada tautan di menu (untuk menutup menu setelah klik)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('show');
+            });
+        });
+    }
 });
