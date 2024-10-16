@@ -4,24 +4,20 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (submitButton) {
         submitButton.addEventListener('click', () => {
-            // Ambil nilai dari input form
             const name = document.querySelector('input[name="name"]').value;
             const email = document.querySelector('input[name="email"]').value;
             const message = document.querySelector('textarea[name="message"]').value;
 
-            // Validasi sederhana
             if (name.trim() === "" || email.trim() === "" || message.trim() === "") {
                 alert('Mohon lengkapi semua field sebelum mengirim.');
                 return;
             }
 
-            // Buat pesan yang akan dikirim ke WhatsApp
             const whatsappMessage = `Halo, saya ${name} (${email}). ${message}`;
             const encodedMessage = encodeURIComponent(whatsappMessage);
-            const phoneNumber = "6285163011367"; // Nomor WhatsApp Anda
+            const phoneNumber = "6285163011367";
             const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
             
-            // Arahkan ke WhatsApp
             window.open(whatsappURL, '_blank');
         });
     }
@@ -31,12 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.getElementById('nav-links');
     
     if (burgerMenu && navLinks) {
-        // Event listener untuk klik tombol burger menu
         burgerMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active'); // Toggle kelas 'active' untuk menampilkan/menyembunyikan menu
+            navLinks.classList.toggle('active');
         });
 
-        // Event listener untuk klik pada tautan di menu (untuk menutup menu setelah klik)
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -53,17 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         { 
             title: "PHP", 
-            description: "Ini adalah bahasa pemrograman ke-2 yang saya latih pada saat saya mengikuti program PKL di Telkom Renon. Saya sangat ingin mengembangkan kemampuan saya untuk membuat website yang dinamis dan modern menggunakan bahasa pemrograman ini.",
+            description: "Ini adalah bahasa pemrograman ke-2 yang saya latih pada saat saya mengikuti program PKL di Telkom Renon.",
             image: "https://via.placeholder.com/300x200?text=PHPProject"
         },
         { 
             title: "JavaScript", 
-            description: "Ini adalah bahasa pemrograman ke-3 yang ingin saya kuasai dan pelajari sepenuhnya. JavaScript memungkinkan saya untuk membuat website yang interaktif dan dinamis.",
+            description: "JavaScript memungkinkan saya untuk membuat website yang interaktif dan dinamis.",
             image: "https://via.placeholder.com/300x200?text=JavaScriptProject"
         }
     ];
     
-    // Fungsi untuk menampilkan proyek
+    // Display Projects
     function displayProjects() {
         const projectList = document.getElementById('project-list');
         if (!projectList) return;
@@ -81,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
             projectList.appendChild(card);
         });
     }
-    
-    // Fungsi untuk membuat bentuk-bentuk mengambang
+
+    // Create Floating Shapes
     function createFloatingShapes() {
         const shapes = ['circle', 'square', 'triangle'];
         const colors = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12'];
@@ -102,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Fungsi untuk animasi navbar saat scroll
+    // Animate Navbar Scroll
     function handleNavbarScroll() {
         const navbar = document.getElementById('navbar');
         if (!navbar) return;
@@ -114,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Fungsi untuk tombol scroll-to-top
+    // Scroll to Top Button
     function handleScrollToTop() {
         const scrollTopBtn = document.getElementById('scrollTopBtn');
         if (!scrollTopBtn) return;
@@ -126,13 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Event listener untuk scroll
+    // Scroll Event Listener
     window.addEventListener('scroll', () => {
         handleNavbarScroll();
         handleScrollToTop();
     });
-    
-    // Event listener untuk tombol scroll-to-top
+
+    // Scroll to Top Button Action
     const scrollTopBtn = document.getElementById('scrollTopBtn');
     if (scrollTopBtn) {
         scrollTopBtn.addEventListener('click', () => {
@@ -140,32 +134,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Event listener untuk form submission
+    // Form Submission
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            // Di sini Anda bisa menambahkan logika untuk mengirim formulir
             alert('Terima kasih! Pesan Anda telah dikirim.');
             contactForm.reset();
         });
     }
-    
-    // Inisialisasi fungsi-fungsi
+
+    // Initialize Functions
     displayProjects();
     createFloatingShapes();
-    
-    // Animasi menggunakan GSAP (Pastikan GSAP dan ScrollTrigger sudah di-load)
+
+    // GSAP Animations
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
     
+        // Header Animation
         gsap.from('#header h1, #header p, #header .btn', {
             opacity: 0,
             y: 50,
             duration: 1,
             stagger: 0.3
         });
-    
+
+        // Section Animations
         gsap.from('.section', {
             opacity: 0,
             y: 50,
@@ -176,7 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 start: 'top 80%'
             }
         });
-    
+
+        // Project Card Animations
         gsap.from('.project-card', {
             opacity: 0,
             scale: 0.8,
@@ -187,7 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 start: 'top 80%'
             }
         });
-    
+
+        // Skill Item Animations
         gsap.from('.skill-item', {
             opacity: 0,
             scale: 0.8,
@@ -198,8 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 start: 'top 80%'
             }
         });
-    
-        // Animasi bentuk-bentuk mengambang
+
+        // Floating Shape Animations
         gsap.to('.shape', {
             y: 'random(-20, 20)',
             x: 'random(-20, 20)',
@@ -212,6 +209,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 amount: 2,
                 from: 'random'
             }
+        });
+
+        // Adding Hover Effects
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, { scale: 1.05, duration: 0.3 });
+            });
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, { scale: 1, duration: 0.3 });
+            });
+        });
+
+        document.querySelectorAll('.skill-item').forEach(skill => {
+            skill.addEventListener('mouseenter', () => {
+                gsap.to(skill, { scale: 1.05, duration: 0.3 });
+            });
+            skill.addEventListener('mouseleave', () => {
+                gsap.to(skill, { scale: 1, duration: 0.3 });
+            });
         });
     } else {
         console.warn('GSAP atau ScrollTrigger tidak terdeteksi. Animasi tidak akan dijalankan.');
