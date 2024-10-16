@@ -30,42 +30,61 @@ body, html {
 }
 
 /* Navbar styles */
+/* Styles for Navbar */
 #navbar {
-    background-color: var(--dark-color);
+    background-color: #333;
     color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    transition: all 0.3s ease;
+    padding: 10px 0;
 }
 
 #navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
 }
 
-#navbar ul {
-    display: flex;
+#nav-links {
     list-style: none;
+    display: flex;
+    gap: 20px;
 }
 
-#navbar ul li {
-    margin-left: 20px;
-}
-
-#navbar ul li a {
+#nav-links li a {
     color: #fff;
     text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
+    font-size: 16px;
 }
 
-#navbar ul li a:hover {
-    color: var(--primary-color);
+#nav-links.active {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #333;
+    position: absolute;
+    top: 60px; /* Sesuaikan dengan tinggi navbar */
+    left: 0;
+    padding: 10px 0;
+}
+
+#burger-menu {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    #nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+    #nav-links.active {
+        display: flex;
+    }
+    #burger-menu {
+        display: block;
+    }
 }
 
 /* Header styles */
@@ -281,34 +300,68 @@ footer {
     opacity: 0.1;
 }
 
-/* Responsive design */
+/* Untuk layar lebih kecil dari 768px */
 @media (max-width: 768px) {
+    #navbar {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: var(--dark-color);
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+
+    /* Gaya untuk container navbar */
     #navbar .container {
         flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
     }
 
+    /* Sembunyikan menu pada layar kecil secara default */
     #navbar ul {
-        margin-top: 20px;
+        display: none;
+        flex-direction: column;
+        width: 100%;
     }
 
+    /* Gaya untuk item menu di dalam ul */
     #navbar ul li {
-        margin: 0 10px;
+        width: 100%;
+        margin: 0;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .about-info {
-        flex-direction: column;
+    #navbar ul li a {
+        display: block;
+        padding: 10px 20px;
     }
 
-    .about-img {
-        margin-right: 0;
-        margin-bottom: 30px;
+    /* Tampilkan menu ketika tombol burger diklik */
+    #navbar ul.show {
+        display: flex;
     }
 
-    .contact-info {
-        flex-direction: column;
+    /* Tambahkan gaya untuk tombol hamburger */
+    #burger-menu {
+        display: block;
+        cursor: pointer;
+        color: white;
+        font-size: 30px;
     }
 
-    .contact-item {
-        margin-bottom: 20px;
+    /* Tambahkan padding untuk konten agar tidak tertutup navbar */
+    body {
+        padding-top: 80px;
     }
+}
+
+/* Tombol hamburger default di desktop disembunyikan */
+#burger-menu {
+    display: none;
+}
+html {
+    scroll-behavior: smooth;
 }
