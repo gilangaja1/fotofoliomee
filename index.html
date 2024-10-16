@@ -6,12 +6,27 @@
     <title>Gilang Aditya - Web Developer Designer</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Tambahkan smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Tambahan styling untuk about-text jika diperlukan */
+        .about-text {
+            margin-left: 20px;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-    <nav id="navbar">
+    <div id="navbar">
         <div class="container">
-            <h1 class="logo">GA</h1>
-            <ul>
+            <a href="#header" class="logo">Gilang Aditya</a>
+            
+            <!-- Tambahkan burger menu -->
+            <div id="burger-menu">☰</div>
+            
+            <ul id="nav-links">
                 <li><a href="#header">Home</a></li>
                 <li><a href="#about">Tentang</a></li>
                 <li><a href="#skills">Keahlian</a></li>
@@ -19,8 +34,9 @@
                 <li><a href="#contact">Kontak</a></li>
             </ul>
         </div>
-    </nav>
+    </div>
 
+    <!-- Header -->
     <header id="header">
         <div class="container">
             <h1>Gilang Aditya</h1>
@@ -32,6 +48,7 @@
         </div>
     </header>
 
+    <!-- Tentang Saya -->
     <section id="about" class="section">
         <div class="container">
             <h2>Tentang Saya</h2>
@@ -43,18 +60,12 @@
                 <div class="about-text">
                     <h3>Pengalaman Saya</h3>
                     <p>Saya telah bekerja pada berbagai proyek web, mulai dari situs sederhana hingga aplikasi web kompleks. Saya selalu bersemangat untuk belajar teknologi baru dan meningkatkan keterampilan saya.</p>
-                    <!-- Add some margin and padding to improve layout -->
-                    <style>
-                        .about-text {
-                            margin-left: 20px;
-                            padding: 10px;
-                        }
-                    </style>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Keahlian -->
     <section id="skills" class="section">
         <div class="container">
             <h2>Keahlian</h2>
@@ -87,15 +98,17 @@
         </div>
     </section>
 
+    <!-- Proyek -->
     <section id="projects" class="section">
         <div class="container">
             <h2>Proyek</h2>
             <div id="project-list" class="project-grid">
-                <!-- Project cards will be added here by JavaScript -->
+                <!-- Project cards akan ditambahkan di sini oleh JavaScript -->
             </div>
         </div>
     </section>
 
+    <!-- Kontak -->
     <section id="contact" class="section">
         <div class="container">
             <h2>Kontak</h2>
@@ -114,12 +127,9 @@
                 </div>
             </div>
             <form id="contact-form">
-                <!-- Input lainnya -->
                 <input type="text" name="name" placeholder="Nama" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <textarea name="message" placeholder="Pesan" required></textarea>
-                
-                <!-- Ubah type submit menjadi button -->
                 <button type="button" id="submitButton" class="btn">Kirim Pesan</button>
             </form>
         </div>
