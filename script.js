@@ -1,22 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-     // Dark mode toggle
-     const darkModeToggle = document.getElementById('darkModeToggle');
-     const body = document.body;
- 
-     if (darkModeToggle) {
-         darkModeToggle.addEventListener('click', () => {
-             body.classList.toggle('dark-mode');
-             localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
-         });
- 
-         // Check for saved dark mode preference
-         if (localStorage.getItem('darkMode') === 'true') {
-             body.classList.add('dark-mode');
-         }
-     }
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+        });
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+        }
+    }
+
     // Handle Submit Button for WhatsApp
     const submitButton = document.getElementById('submitButton');
-    
+
     if (submitButton) {
         submitButton.addEventListener('click', () => {
             const name = document.querySelector('input[name="name"]').value;
@@ -32,21 +33,24 @@ document.addEventListener('DOMContentLoaded', () => {
             const encodedMessage = encodeURIComponent(whatsappMessage);
             const phoneNumber = "6285163011367";
             const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-            
-            window.open(whatsappURL, '_blank');
 
-            // Parallax effect for header
-             window.addEventListener('scroll', () => {
-            const header = document.querySelector('#header');
-            if (header) {
+            window.open(whatsappURL, '_blank');
+        });
+    }
+
+    // Parallax effect for header
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('#header');
+        if (header) {
             const scrollPosition = window.pageYOffset;
             header.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+        }
+    });
 
-
-            // Scroll animations
-            const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate-on-scroll');
-            elements.forEach(element => {
+    // Scroll animations
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.animate-on-scroll');
+        elements.forEach(element => {
             const elementTop = element.getBoundingClientRect().top;
             const windowHeight = window.innerHeight;
             if (elementTop < windowHeight * 0.75) {
@@ -57,15 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', animateOnScroll);
     animateOnScroll(); // Initial check on load
-        }
-    });
-        });
-    }
 
     // Burger Menu Toggle (Improved for Mobile)
     const burgerMenu = document.getElementById('burger-menu');
     const navLinks = document.getElementById('nav-links');
-    
+
     if (burgerMenu && navLinks) {
         burgerMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
@@ -98,47 +98,60 @@ document.addEventListener('DOMContentLoaded', () => {
             image: "https://via.placeholder.com/300x200?text=JavaScriptProject"
         }
     ];
-    
-    // Display Projects (Swipe for Mobile)
+
+    // Fungsi untuk menampilkan proyek
     function displayProjects() {
         const projectList = document.getElementById('project-list');
         if (!projectList) return;
 
+        // Menambahkan setiap proyek sebagai slide
         projects.forEach(project => {
-            const card = document.createElement('div');
-            card.className = 'project-card';
-            card.innerHTML = `
-                <img src="${project.image}" alt="${project.title}">
-                <div class="project-card-content">
-                    <h3>${project.title}</h3>
-                    <p>${project.description}</p>
+            const slide = document.createElement('div');
+            slide.className = 'swiper-slide';  // Harus "swiper-slide" agar Swiper dapat mengenali elemen ini sebagai slide
+
+            slide.innerHTML = `
+                <div class="project-card">
+                    <img src="${project.image}" alt="${project.title}">
+                    <div class="project-card-content">
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                    </div>
                 </div>
             `;
-            projectList.appendChild(card);
+            projectList.appendChild(slide);
         });
 
-        // Implement swipe functionality for mobile devices
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        projectList.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        projectList.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            const swipeThreshold = 50; // Minimum swipe distance
-            if (touchEndX < touchStartX - swipeThreshold) {
-                projectList.scrollLeft += 300; // Swipe left
-            } else if (touchEndX > touchStartX + swipeThreshold) {
-                projectList.scrollLeft -= 300; // Swipe right
+        // Inisialisasi Swiper setelah proyek ditambahkan ke dalam DOM
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 30,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 40,
+                },
             }
-        }
+        });
     }
+
+    // Panggil fungsi untuk menampilkan proyek saat halaman dimuat
+    window.onload = displayProjects;
 
     // Create Floating Shapes
     function createFloatingShapes() {
@@ -159,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
             floatingShapes.appendChild(shape);
         }
     }
-    
+
     // Animate Navbar Scroll (Sticky Navbar for Mobile)
     function handleNavbarScroll() {
         const navbar = document.getElementById('navbar');
@@ -185,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollTopBtn.style.display = 'none';
         }
     }
-    
+
     // Scroll Event Listener
     window.addEventListener('scroll', () => {
         handleNavbarScroll();
@@ -199,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
-    
+
     // Form Submission
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
@@ -224,54 +237,38 @@ document.addEventListener('DOMContentLoaded', () => {
         // Header Animation
         gsap.from('#header h1, #header p, #header .btn', {
             opacity: 0,
-            y: 50,
-            duration: 1,
-            stagger: 0.3
-        });
-
-        // Section Animations
-        gsap.from('.section', {
-            opacity: 0,
-            y: 50,
-            duration: 1,
-            stagger: 0.3,
-            scrollTrigger: {
-                trigger: '.section',
-                start: 'top 80%',
-                markers: false,  // Disable scroll markers for a cleaner experience
-                onEnter: () => console.log("Section entered"),
-                once: true  // Only trigger once for mobile performance
-            }
-        });
-
-        // Project Card Animations
-        gsap.from('.project-card', {
-            opacity: 0,
-            scale: isMobile ? 0.9 : 0.8,  // Slightly larger on mobile for smoother performance
-            duration: 0.5,
+            y: 20,
+            duration: 1.5,
+            ease: 'power2.out',
             stagger: 0.2,
-            scrollTrigger: {
-                trigger: '#projects',
-                start: 'top 80%',
-                once: true
-            }
         });
 
-        // Floating Shape Animations (Mobile-friendly)
-        gsap.to('.shape', {
-            y: 'random(-10, 10)',  // Reduced movement for mobile performance
-            x: 'random(-10, 10)',
-            rotation: 'random(-15, 15)',
-            duration: 'random(3, 5)',
+        // Floating Shapes Animation (Slower for mobile to reduce performance impact)
+        const shapeSpeed = isMobile ? 15 : 10;
+
+        gsap.to('.floating-shapes .shape', {
+            y: 'random(-20, 20)',
+            x: 'random(-20, 20)',
+            duration: shapeSpeed,
             repeat: -1,
             yoyo: true,
-            ease: 'sine.inOut',
-            stagger: {
-                amount: 2,
-                from: 'random'
-            }
+            ease: 'power1.inOut',
         });
-    } else {
-        console.warn('GSAP atau ScrollTrigger tidak terdeteksi. Animasi tidak akan dijalankan.');
+
+        // Animate on Scroll
+        gsap.utils.toArray('.fade-in').forEach((element) => {
+            gsap.from(element, {
+                opacity: 0,
+                y: 50,
+                duration: 1.5,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: element,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse',
+                },
+            });
+        });
     }
+
 });
