@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+     // Dark mode toggle
+     const darkModeToggle = document.getElementById('darkModeToggle');
+     const body = document.body;
+ 
+     if (darkModeToggle) {
+         darkModeToggle.addEventListener('click', () => {
+             body.classList.toggle('dark-mode');
+             localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+         });
+ 
+         // Check for saved dark mode preference
+         if (localStorage.getItem('darkMode') === 'true') {
+             body.classList.add('dark-mode');
+         }
+     }
     // Handle Submit Button for WhatsApp
     const submitButton = document.getElementById('submitButton');
     
@@ -19,6 +34,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
             
             window.open(whatsappURL, '_blank');
+
+            // Parallax effect for header
+             window.addEventListener('scroll', () => {
+            const header = document.querySelector('#header');
+            if (header) {
+            const scrollPosition = window.pageYOffset;
+            header.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+
+
+            // Scroll animations
+            const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            if (elementTop < windowHeight * 0.75) {
+                element.classList.add('animated');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll(); // Initial check on load
+        }
+    });
         });
     }
 
