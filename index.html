@@ -6,6 +6,7 @@
     <title>Gilang Aditya - Web Developer Designer</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <style>
         /* Tambahkan smooth scrolling */
         html {
@@ -35,6 +36,9 @@
             </ul>
         </div>
     </div>
+
+    <!-- Tambahkan dark mode toggle di sini -->
+    <button id="darkModeToggle" class="dark-mode-toggle">🌓</button>
 
     <!-- Header -->
     <header id="header">
@@ -99,14 +103,19 @@
     </section>
 
     <!-- Proyek -->
-    <section id="projects" class="section">
-        <div class="container">
-            <h2>Proyek</h2>
-            <div id="project-list" class="project-grid">
-                <!-- Project cards akan ditambahkan di sini oleh JavaScript -->
+<section id="projects" class="section">
+    <div class="container">
+        <h2>Proyek</h2>
+        <div class="swiper-container">
+            <div class="swiper-wrapper" id="project-list">
+                <!-- Project cards will be dynamically added here -->
             </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Kontak -->
     <section id="contact" class="section">
@@ -143,6 +152,7 @@
 
     <button id="scrollTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
 
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
