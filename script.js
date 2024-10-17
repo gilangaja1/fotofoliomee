@@ -47,6 +47,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Skill Chart (Chart.js)
+    const ctx = document.getElementById('programmingSkillsChart').getContext('2d');
+    const programmingSkillsChart = new Chart(ctx, {
+        type: 'bar', // atau 'radar', 'pie', dll.
+        data: {
+            labels: ['HTML', 'CSS', 'JavaScript', 'PHP', 'React', 'SQL'],
+            datasets: [{
+                label: 'Tingkat Keahlian',
+                data: [90, 80, 85, 70, 75, 65], // Atur sesuai tingkat keahlian
+                backgroundColor: 'rgba(52, 152, 219, 0.7)',
+                borderColor: 'rgba(52, 152, 219, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
     // Scroll animations
     const animateOnScroll = () => {
         const elements = document.querySelectorAll('.animate-on-scroll');
@@ -80,6 +103,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+     // Animasi untuk chart saat muncul (GSAP + ScrollTrigger)
+     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.from('#programmingSkillsChart', {
+            opacity: 0,
+            y: 50,
+            duration: 1.5,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: '#skills-chart',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+    }
+
     // Data Proyek
     const projects = [
         { 
@@ -94,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         { 
             title: "JavaScript", 
-            description: "JavaScript memungkinkan saya untuk membuat website yang interaktif dan dinamis.",
+            description: "JavaScript adalah bahasa pemograman yang memungkinkan saya untuk membuat website yang interaktif dan dinamis.",
             image: "https://via.placeholder.com/300x200?text=JavaScriptProject"
         }
     ];
