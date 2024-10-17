@@ -21,6 +21,7 @@ body, html {
     line-height: 1.6;
     color: var(--dark-color);
     scroll-behavior: smooth;
+    overflow-x: hidden; /* Menjaga agar tidak ada elemen yang keluar dari viewport */
 }
 
 /* Dark mode styles */
@@ -46,6 +47,7 @@ body.dark-mode .container {
     padding: 10px 0;
     position: relative;
     z-index: 1000;
+    width: 100%; /* Tambahkan width 100% agar tetap berada di viewport */
 }
 
 #navbar .container {
@@ -132,30 +134,30 @@ body.dark-mode .container {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: #fff;
     text-align: center;
-    padding: 150px 20px 100px;
+    padding: 100px 20px; /* Sesuaikan padding agar proporsional di mobile */
     position: relative;
     overflow: hidden;
 }
 
 #header h1 {
-    font-size: 3rem;
+    font-size: 2.5rem; /* Ubah ukuran font untuk mobile */
     margin-bottom: 20px;
 }
 
 #header p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 30px;
 }
 
 /* Section styles */
 .section {
-    padding: 80px 20px;
+    padding: 60px 20px; /* Sesuaikan padding agar tidak terlalu besar di mobile */
 }
 
 .section h2 {
     text-align: center;
-    margin-bottom: 40px;
-    font-size: 2.5rem;
+    margin-bottom: 30px;
+    font-size: 2rem;
     color: var(--dark-color);
 }
 
@@ -204,17 +206,162 @@ body.dark-mode .container {
     transform: translateY(-5px);
 }
 
-.skill-item i {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 15px;
-}
-
 /* Projects section */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Sesuaikan min-width */
+    gap: 20px;
+}
+
+.project-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-card img {
+    width: 100%;
+    height: 180px; /* Sesuaikan tinggi gambar */
+    object-fit: cover;
+}
+
+.project-card-content {
+    padding: 20px;
+}
+
+.project-card h3 {
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+/* Contact section */
+.contact-info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.contact-item {
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+}
+
+.contact-item i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+#contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#contact-form input,
+#contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#contact-form textarea {
+    height: 150px;
+}
+
+/* Button styles */
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Footer styles */
+footer {
+    background-color: var(--dark-color);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Scroll to top button */
+#scrollTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+#scrollTopBtn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Floating shapes */
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.shape {
+    position: absolute;
+    opacity: 0.1;
+}
+
+/* Responsive Adjustments for Flex and Grid Layouts */
+@media (max-width: 768px) {
+    .about-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-img,
+    .about-text {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ubah ukuran minimal kolom */
+    }
+
+    .project-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ubah ukuran minimal kolom */
+    }
 }
 
 .project-card {
