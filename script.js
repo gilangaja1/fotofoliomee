@@ -136,17 +136,14 @@ document.addEventListener('DOMContentLoaded', () => {
         { 
             title: "C++", 
             description: "Saya pertama kali belajar bahasa pemrograman C++ di sekolah saya dan saya semakin tertarik belajar tentang pemrograman.",
-            image: "https://via.placeholder.com/300x200?text=C++Project"
         },
         { 
             title: "PHP", 
             description: "Ini adalah bahasa pemrograman ke-2 yang saya latih pada saat saya mengikuti program PKL di Telkom Renon.",
-            image: "https://via.placeholder.com/300x200?text=PHPProject"
         },
         { 
             title: "JavaScript", 
             description: "JavaScript adalah bahasa pemograman yang memungkinkan saya untuk membuat website yang interaktif dan dinamis.",
-            image: "https://via.placeholder.com/300x200?text=JavaScriptProject"
         }
     ];
 
