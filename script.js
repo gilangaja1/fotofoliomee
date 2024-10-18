@@ -2,6 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dark mode toggle
     const darkModeToggle = document.getElementById('darkModeToggle');
     const body = document.body;
+    const title = document.querySelector('.title-toggle');
+    console.log("Script is running!"); // This will check if your script is loaded
+
+    if (title) {
+        console.log("Title element found"); // This will check if the title is selected
+        setInterval(() => {
+            title.classList.toggle('hidden');
+            console.log("Toggled title visibility"); // Log when toggling happens
+        }, 3000); // 3 seconds interval
+    } else {
+        console.log("Title element not found");
+    }
 
     if (darkModeToggle) {
         darkModeToggle.addEventListener('click', () => {
@@ -33,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const encodedMessage = encodeURIComponent(whatsappMessage);
             const phoneNumber = "6285163011367";
             const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
             window.open(whatsappURL, '_blank');
         });
     }
