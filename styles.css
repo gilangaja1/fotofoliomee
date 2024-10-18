@@ -573,4 +573,46 @@ footer {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+.dark-mode-toggle {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    background-color: var(--primary-color) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 24px !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+    z-index: 1001 !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.dark-mode-toggle:hover {
+    background-color: var(--secondary-color) !important;
+}
+.title-toggle {
+    opacity: 1;
+    transition: opacity 1s ease-in-out; /* Adjust the duration if needed */
+}
+
+.title-toggle.hidden {
+    opacity: 0;
+}
+.hidden {
+    display: none;
+}
+
+.title-toggle {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.hidden {
+    opacity: 0;
+    display: none;
+}
+
 }
