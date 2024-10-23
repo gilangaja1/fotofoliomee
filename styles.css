@@ -734,4 +734,200 @@ footer {
     border-right: 30px solid transparent;
     border-bottom: 60px solid #2ecc71;
 }
+/* Glitch effect for the text */
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+        opacity: 1;
+    }
+    10% {
+        transform: translate(-2px, -2px);
+        opacity: 0.8;
+    }
+    20% {
+        transform: translate(2px, 2px);
+        opacity: 0.6;
+    }
+    30% {
+        transform: translate(-2px, 2px);
+        opacity: 0.8;
+    }
+    40% {
+        transform: translate(2px, -2px);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(0);
+        opacity: 0.9;
+    }
+    60% {
+        transform: translate(1px, -1px);
+        opacity: 0.7;
+    }
+    70% {
+        transform: translate(-1px, 1px);
+        opacity: 0.9;
+    }
+    80% {
+        transform: translate(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0);
+        opacity: 1;
+    }
+}
+
+/* Apply glitch effect */
+.glitch {
+    position: relative;
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 1px 1px red, -1px -1px blue;
+    animation: glitch 1s infinite;
+}
+/* Animated Background Gradient */
+#header {
+    background: linear-gradient(-45deg, #3498db, #8e44ad, #2ecc71, #f1c40f);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Neon Text Effect for Skills */
+.skill-item h3 {
+    color: #fff;
+    text-shadow: 0 0 5px #3498db,
+                 0 0 10px #3498db,
+                 0 0 20px #3498db,
+                 0 0 40px #3498db;
+    animation: neonPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+    from { text-shadow: 0 0 5px #3498db, 0 0 10px #3498db, 0 0 20px #3498db; }
+    to { text-shadow: 0 0 10px #3498db, 0 0 20px #3498db, 0 0 30px #3498db; }
+}
+
+/* Cool Hover Effect for Project Cards */
+.project-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.project-card:hover::before {
+    left: 100%;
+}
+
+/* Animated Border for Contact Form */
+#contact-form input,
+#contact-form textarea {
+    border: 2px solid transparent;
+    background: 
+        linear-gradient(white, white) padding-box,
+        linear-gradient(45deg, #3498db, #8e44ad) border-box;
+    animation: borderRotate 4s linear infinite;
+}
+
+@keyframes borderRotate {
+    from { border-image: linear-gradient(0deg, #3498db, #8e44ad) 1; }
+    to { border-image: linear-gradient(360deg, #3498db, #8e44ad) 1; }
+}
+
+/* Particle Effects for Header */
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Section Dividers */
+.section::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(45deg, transparent 33.33%, #fff 33.33%, #fff 66.66%, transparent 66.66%);
+    background-size: 30px 30px;
+}
+
+/* Skill Progress Animation */
+.skill-progress {
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    100% { left: 100%; }
+}
+
+/* 3D Button Effect */
+.btn {
+    transform-style: preserve-3d;
+    transition: transform 0.2s;
+}
+
+.btn:active {
+    transform: translateY(4px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
 }
