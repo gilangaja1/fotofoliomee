@@ -23,6 +23,77 @@ body, html {
     scroll-behavior: smooth;
     overflow-x: hidden; /* Menjaga agar tidak ada elemen yang keluar dari viewport */
 }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #8e44ad;
+    --dark-color: #2c3e50;
+    --light-color: #ecf0f1;
+}
+
+body, html {
+    font-family: 'Poppins', sans-serif;
+    color: var(--dark-color);
+}
+
+#header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.shape {
+    position: absolute;
+    opacity: 0.1;
+    border-radius: 50%;
+    animation: floatShape 15s infinite ease-in-out;
+}
+
+@keyframes floatShape {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-20px) scale(1.2);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.circle {
+    background-color: #3498db;
+    width: 40px;
+    height: 40px;
+}
+
+.square {
+    background-color: #e74c3c;
+    width: 50px;
+    height: 50px;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 60px solid #2ecc71;
+}
 
 /* Dark mode styles */
 body.dark-mode {
@@ -151,7 +222,7 @@ body.dark-mode .container {
 
 /* Section styles */
 .section {
-    padding: 60px 20px; /* Sesuaikan padding agar tidak terlalu besar di mobile */
+    padding: 40px 20px; /* Sesuaikan padding agar tidak terlalu besar di mobile */
 }
 
 .section h2 {
@@ -614,5 +685,53 @@ footer {
     opacity: 0;
     display: none;
 }
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+}
 
+.shape {
+    position: absolute;
+    opacity: 0.1;
+    border-radius: 50%;
+    animation: floatShape 15s infinite ease-in-out;
+}
+
+@keyframes floatShape {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-20px) scale(1.2);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Add more colors and sizes */
+.circle {
+    background-color: #3498db;
+    width: 40px;
+    height: 40px;
+}
+
+.square {
+    background-color: #e74c3c;
+    width: 50px;
+    height: 50px;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 60px solid #2ecc71;
+}
 }
