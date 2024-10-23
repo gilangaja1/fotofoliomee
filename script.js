@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             body.classList.add('dark-mode');
         }
     }
+    
 
     // Handle Submit Button for WhatsApp
     const submitButton = document.getElementById('submitButton');
