@@ -26,7 +26,120 @@ document.addEventListener('DOMContentLoaded', () => {
             body.classList.add('dark-mode');
         }
     }
-    
+
+    // Particle System for Header
+function createParticles() {
+    const header = document.querySelector('#header');
+    if (!header) return;  // Prevent error if header is not found
+
+    const particleCount = 50;
+
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+
+        // Random position
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+
+        // Random animation
+        particle.style.animation = `
+            float ${5 + Math.random() * 10}s linear infinite,
+            fade ${3 + Math.random() * 2}s ease-in-out infinite alternate
+        `;
+
+        header.appendChild(particle);
+    }
+}
+
+// Smooth Reveal for Skills
+function revealSkills() {
+    const skills = document.querySelectorAll('.skill-item');
+    if (!skills.length) return;  // Prevent error if no skill items found
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    skills.forEach(skill => {
+        skill.style.opacity = '0';
+        skill.style.transform = 'translateY(50px)';
+        skill.style.transition = 'all 0.6s ease-out';
+        observer.observe(skill);
+    });
+}
+
+// Typing Effect for Header Title
+function typeEffect() {
+    const title = document.querySelector('#gilang-aditya');
+    if (!title) return;  // Prevent error if title is not found
+
+    const text = title.textContent;
+    title.textContent = '';
+
+    let i = 0;
+    const typing = setInterval(() => {
+        if (i < text.length) {
+            title.textContent += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typing);
+        }
+    }, 100);
+}
+
+// Tilt effect for project cards
+function addTiltEffect() {
+    const cards = document.querySelectorAll('.project-card');
+    if (!cards.length) return;  // Prevent error if no project cards found
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+    });
+}
+
+// Initialize Enhancements
+document.addEventListener('DOMContentLoaded', () => {
+    createParticles();
+    revealSkills();
+    typeEffect();
+    addTiltEffect();
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
 
     // Handle Submit Button for WhatsApp
     const submitButton = document.getElementById('submitButton');
@@ -133,20 +246,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Data Proyek
-    const projects = [
-        { 
-            title: "C++", 
-            description: "Saya pertama kali belajar bahasa pemrograman C++ di sekolah saya dan saya semakin tertarik belajar tentang pemrograman.",
-        },
-        { 
-            title: "PHP", 
-            description: "Ini adalah bahasa pemrograman ke-2 yang saya latih pada saat saya mengikuti program PKL di Telkom Renon.",
-        },
-        { 
-            title: "JavaScript", 
-            description: "JavaScript adalah bahasa pemograman yang memungkinkan saya untuk membuat website yang interaktif dan dinamis.",
-        }
-    ];
+const projects = [
+    { 
+        title: "C++", 
+        description: "Saya pertama kali belajar bahasa pemrograman C++ di sekolah saya dan saya semakin tertarik belajar tentang pemrograman.",
+        image: "c++.jpg" // Gambar untuk C++ misalnya cpp.jpg di folder images
+    },
+    { 
+        title: "PHP", 
+        description: "Ini adalah bahasa pemrograman ke-2 yang saya latih pada saat saya mengikuti program PKL di Telkom Renon.",
+        image: "php.jpg" // Gambar untuk PHP misalnya php.jpg di folder images
+    },
+    { 
+        title: "JavaScript", 
+        description: "JavaScript adalah bahasa pemograman yang memungkinkan saya untuk membuat website yang interaktif dan dinamis.",
+        image: "javascript.jpg" // Gambar untuk JavaScript misalnya javascript.jpg di folder images
+    }
+];
 
     // Fungsi untuk menampilkan proyek
     function displayProjects() {
