@@ -1,19 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Dark mode toggle
+    // --- Dark mode toggle ---
     const darkModeToggle = document.getElementById('darkModeToggle');
     const body = document.body;
-    const title = document.querySelector('.title-toggle');
-    console.log("Script is running!"); // This will check if your script is loaded
 
-    if (title) {
-        console.log("Title element found"); // This will check if the title is selected
-        setInterval(() => {
-            title.classList.toggle('hidden');
-            console.log("Toggled title visibility"); // Log when toggling happens
-        }, 3000); // 3 seconds interval
-    } else {
-        console.log("Title element not found");
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+        });
+
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+        }
     }
+
+    // --- Kode Baru: Ripple Button Effect (Tambahkan di sini, di bawah Dark Mode Toggle) ---
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        button.addEventListener('click', function (e) {
+            let ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            ripple.style.left = `${e.clientX - this.offsetLeft}px`;
+            ripple.style.top = `${e.clientY - this.offsetTop}px`;
+            this.appendChild(ripple);
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
 
     if (darkModeToggle) {
         darkModeToggle.addEventListener('click', () => {
@@ -172,15 +186,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Skill Chart (Chart.js)
+    // --- Skill Chart (Chart.js) ---
     const ctx = document.getElementById('programmingSkillsChart').getContext('2d');
     const programmingSkillsChart = new Chart(ctx, {
-        type: 'bar', // atau 'radar', 'pie', dll.
+        type: 'bar',
         data: {
             labels: ['HTML', 'CSS', 'JavaScript', 'PHP', 'React', 'SQL'],
             datasets: [{
                 label: 'Tingkat Keahlian',
-                data: [90, 80, 85, 70, 75, 65], // Atur sesuai tingkat keahlian
+                data: [90, 80, 85, 70, 75, 65],
                 backgroundColor: 'rgba(52, 152, 219, 0.7)',
                 borderColor: 'rgba(52, 152, 219, 1)',
                 borderWidth: 1
@@ -194,6 +208,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // --- Kode Baru: Scroll Animations (Tambahkan di sini, di bawah Skill Chart) ---
+    const scrollElements = document.querySelectorAll('.scroll-element');
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+            }
+        });
+    });
+    scrollElements.forEach(el => scrollObserver.observe(el));
 
     // Scroll animations
     const animateOnScroll = () => {
@@ -399,7 +424,10 @@ const projects = [
         // Mobile-specific animations
         const isMobile = window.innerWidth <= 768;
 
-        // Header Animation
+         // --- GSAP Scroll Animations ---
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
         gsap.from('#header h1, #header p, #header .btn', {
             opacity: 0,
             y: 20,
@@ -407,6 +435,21 @@ const projects = [
             ease: 'power2.out',
             stagger: 0.2,
         });
+
+        // --- Parallax Animations ---
+        gsap.utils.toArray('.parallax-element').forEach((el) => {
+            gsap.to(el, {
+                yPercent: 20,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true,
+                }
+            });
+        });
+    }
 
         // Floating Shapes Animation (Slower for mobile to reduce performance impact)
         const shapeSpeed = isMobile ? 15 : 10;
@@ -437,3 +480,64 @@ const projects = [
     }
 
 });
+
+// Tambahkan kode ini di JavaScript Anda
+function createSnowfall() {
+    const header = document.querySelector('#header');
+    if (!header) return;
+
+    const snowflakeCount = 30;
+    for (let i = 0; i < snowflakeCount; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        snowflake.style.left = Math.random() * 100 + '%';
+        snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`; 
+        header.appendChild(snowflake);
+    }
+}
+
+// Panggil fungsi di dalam event listener
+document.addEventListener('DOMContentLoaded', function() {
+    createSnowfall();
+    // Panggilan fungsi atau kode lain yang sudah ada sebelumnya
+});
+
+function animateSkillBars() {
+    const skillBars = document.querySelectorAll('.skill-item .progress');
+    skillBars.forEach((bar) => {
+        const width = bar.getAttribute('data-skill');
+        bar.style.width = `${width}%`;
+        bar.style.transition = 'width 1s ease-in-out';
+        bar.style.boxShadow = '0px 0px 10px rgba(0, 255, 255, 0.7)';
+    });
+}
+
+// Panggil fungsi di dalam ScrollTrigger atau event scroll
+document.addEventListener('DOMContentLoaded', function() {
+    // Panggilan fungsi createSnowfall dan lainnya...
+    animateSkillBars();
+});
+
+function startConfetti() {
+    const confettiCount = 100;
+    const contactSection = document.querySelector('#kontak');
+    for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.animationDuration = `${Math.random() * 2 + 3}s`;
+        contactSection.appendChild(confetti);
+    }
+}
+
+// Event listener scroll untuk memicu confetti di bagian Kontak
+document.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('scroll', () => {
+        const contactPosition = document.querySelector('#kontak').getBoundingClientRect().top;
+        if (contactPosition < window.innerHeight) {
+            startConfetti();
+        }
+    });
+});
+
