@@ -104,6 +104,13 @@ body.dark-mode {
 body.dark-mode .container {
     background-color: #1e1e1e;
 }
+body.dark-mode .project-card h3 {
+    color: #ffffff; /* Judul berwarna putih di mode gelap */
+}
+
+body.dark-mode .project-card p {
+    color: #d3d3d3; /* Paragraf dengan warna abu agar kontras */
+}
 
 .container {
     max-width: 1200px;

@@ -629,3 +629,11 @@ const chatbotButton = document.getElementById('chatbotButton');
             }
         });
     }
+    document.addEventListener('DOMContentLoaded', () => {
+        const scroll = new LocomotiveScroll({
+            el: document.querySelector('#main-container'),
+            smooth: true,
+            multiplier: 0.8 // Menyesuaikan kecepatan gulir
+        });
+    });
+    
