@@ -14,6 +14,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Progress Bar Scroll
+        const progressBar = document.createElement('div');
+        progressBar.id = 'progress-bar';
+        document.body.appendChild(progressBar);
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            progressBar.style.width = scrollPercent + '%';
+        });
+  
     // --- Kode Baru: Ripple Button Effect (Tambahkan di sini, di bawah Dark Mode Toggle) ---
     const buttons = document.querySelectorAll('.btn');
     buttons.forEach(button => {
@@ -78,7 +90,7 @@ function revealSkills() {
                 entry.target.style.transform = 'translateY(0)';
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1 }); 
 
     skills.forEach(skill => {
         skill.style.opacity = '0';
@@ -296,6 +308,35 @@ const projects = [
 
         // Menambahkan setiap proyek sebagai slide
         projects.forEach(project => {
+            // Inisialisasi Swiper dengan efek 3D
+const swiper = new Swiper('.swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+        640: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+    },
+});
+
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';  // Harus "swiper-slide" agar Swiper dapat mengenali elemen ini sebagai slide
 
@@ -310,6 +351,7 @@ const projects = [
             `;
             projectList.appendChild(slide);
         });
+        
 
         // Inisialisasi Swiper setelah proyek ditambahkan ke dalam DOM
         var swiper = new Swiper('.swiper-container', {
@@ -481,7 +523,6 @@ const projects = [
 
 });
 
-// Tambahkan kode ini di JavaScript Anda
 function createSnowfall() {
     const header = document.querySelector('#header');
     if (!header) return;
@@ -531,6 +572,13 @@ function startConfetti() {
     }
 }
 
+ // Initialize Enhancements and Chatbot
+ createParticles();
+ revealSkills();
+ typeEffect();
+ addTiltEffect();
+ initChatbot(); // Call initChatbot here
+
 // Event listener scroll untuk memicu confetti di bagian Kontak
 document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', () => {
@@ -538,6 +586,46 @@ document.addEventListener('DOMContentLoaded', function() {
         if (contactPosition < window.innerHeight) {
             startConfetti();
         }
+
+        
     });
 });
 
+const chatbotButton = document.getElementById('chatbotButton');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatbotInput = document.getElementById('chatbotInput');
+
+    if (chatbotButton && chatbotWindow && chatbotInput && chatbotMessages) {
+        // Menampilkan atau menyembunyikan chatbot saat tombol ditekan
+        chatbotButton.addEventListener('click', () => {
+            chatbotWindow.classList.toggle('open'); // Gunakan class 'open' untuk mengontrol tampilan
+        });
+
+        const responses = {
+            "hello": "Hi there! How can I assist you?",
+            "portfolio": "This portfolio showcases my skills and projects. Let me know if you want details!",
+            "contact": "You can reach out to me via the contact section!",
+        };
+
+        chatbotInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const userInput = chatbotInput.value.toLowerCase();
+                const response = responses[userInput] || "I'm here to help, but I didn’t understand that.";
+
+                // Menambahkan pesan pengguna
+                const userMessage = document.createElement('div');
+                userMessage.className = 'chatbot-user';
+                userMessage.textContent = chatbotInput.value;
+                chatbotMessages.appendChild(userMessage);
+
+                // Menambahkan pesan bot
+                const botMessage = document.createElement('div');
+                botMessage.className = 'chatbot-bot';
+                botMessage.textContent = response;
+                chatbotMessages.appendChild(botMessage);
+
+                chatbotInput.value = '';
+            }
+        });
+    }
