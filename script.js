@@ -636,4 +636,33 @@ const chatbotButton = document.getElementById('chatbotButton');
             multiplier: 0.8 // Menyesuaikan kecepatan gulir
         });
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const navLinks = document.querySelectorAll('#nav-links a');
     
+        // Fungsi untuk mengupdate link navbar berdasarkan posisi scroll
+        function updateActiveLink() {
+            const sections = document.querySelectorAll('section');
+            let scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
+    
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+    
+                if (
+                    scrollPosition >= sectionTop - 50 && // Buffer 50px agar tepat
+                    scrollPosition < sectionTop + sectionHeight
+                ) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    document.querySelector(`#nav-links a[href="#${sectionId}"]`).classList.add('active');
+                }
+            });
+        }
+    
+        // Panggil fungsi saat halaman di-scroll
+        window.addEventListener('scroll', updateActiveLink);
+    
+        // Panggil fungsi langsung untuk menetapkan link aktif saat halaman dimuat
+        updateActiveLink();
+    });
