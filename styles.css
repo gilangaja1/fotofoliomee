@@ -1142,7 +1142,7 @@ body.theme-vibrant .btn:hover {
 #theme-selector {
     position: fixed;
     top: 20px !important;
-    left: 50%;
+    left: 60%;
     transform: translateX(-50%);
     display: flex;
     gap: 5px;
