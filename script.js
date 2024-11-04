@@ -1,18 +1,37 @@
+// Theme Selector Logic
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Dark mode toggle ---
-    const darkModeToggle = document.getElementById('darkModeToggle');
+    const themeButtons = document.querySelectorAll('.theme-button');
     const body = document.body;
 
-    if (darkModeToggle) {
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+    // Fungsi untuk mengubah tema
+    function setTheme(theme) {
+        body.classList.remove('theme-default', 'theme-dark', 'theme-vibrant');
+        
+        if (theme !== 'default') {
+            body.classList.add(`theme-${theme}`);
+        }
+
+        localStorage.setItem('portfolioTheme', theme);
+    }
+
+    // Event listener untuk perangkat sentuh dan desktop
+    themeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const selectedTheme = button.getAttribute('data-theme');
+            setTheme(selectedTheme);
         });
 
-        if (localStorage.getItem('darkMode') === 'true') {
-            body.classList.add('dark-mode');
-        }
-    }
+        // Untuk perangkat layar sentuh
+        button.addEventListener('touchstart', () => {
+            const selectedTheme = button.getAttribute('data-theme');
+            setTheme(selectedTheme);
+        });
+    });
+
+    // Cek tema tersimpan di localStorage
+    const savedTheme = localStorage.getItem('portfolioTheme') || 'default';
+    setTheme(savedTheme);
+});
 
     // Progress Bar Scroll
         const progressBar = document.createElement('div');
@@ -521,8 +540,6 @@ const swiper = new Swiper('.swiper-container', {
         });
     }
 
-});
-
 function createSnowfall() {
     const header = document.querySelector('#header');
     if (!header) return;
@@ -686,31 +703,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Periksa ulang mode setiap kali halaman dimuat ulang
     window.addEventListener('focus', setAutoMode);
-});
-
-// Theme Selector Logic
-document.addEventListener('DOMContentLoaded', () => {
-    const themeButtons = document.querySelectorAll('.theme-button');
-    const body = document.body;
-
-    // Fungsi untuk mengubah tema
-    function setTheme(theme) {
-        body.classList.remove('theme-dark', 'theme-vibrant'); // Hapus tema lain yang ada
-        if (theme !== 'default') {
-            body.classList.add(`theme-${theme}`); // Tambahkan tema yang dipilih
-        }
-        localStorage.setItem('portfolioTheme', theme); // Simpan tema ke localStorage
-    }
-
-    // Event listener untuk setiap tombol tema
-    themeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const selectedTheme = button.getAttribute('data-theme');
-            setTheme(selectedTheme);
-        });
-    });
-
-    // Cek tema tersimpan di localStorage
-    const savedTheme = localStorage.getItem('portfolioTheme') || 'default';
-    setTheme(savedTheme); // Setel tema saat halaman dimuat
 });
