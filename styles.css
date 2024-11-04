@@ -1096,25 +1096,6 @@ body.theme-dark .project-card {
     background-color: #333;
     color: #eee;
 }
-
-/* Vibrant Theme */
-body.theme-vibrant {
-    background-color: #fffbf0;
-    color: #2c3e50;
-}
-body.theme-vibrant .container {
-    background-color: #fef9e7;
-}
-body.theme-vibrant .project-card {
-    background-color: #ffeaa7;
-    color: #2d3436;
-}
-body.theme-vibrant .btn {
-    background-color: #fd79a8;
-}
-body.theme-vibrant .btn:hover {
-    background-color: #fab1a0;
-}
 /* Theme Selector Styling */
 #theme-selector {
     position: fixed;
