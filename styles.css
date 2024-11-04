@@ -95,23 +95,6 @@ body, html {
     border-bottom: 60px solid #2ecc71;
 }
 
-/* Dark mode styles */
-body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
-}
-
-body.dark-mode .container {
-    background-color: #1e1e1e;
-}
-body.dark-mode .project-card h3 {
-    color: #ffffff; /* Judul berwarna putih di mode gelap */
-}
-
-body.dark-mode .project-card p {
-    color: #d3d3d3; /* Paragraf dengan warna abu agar kontras */
-}
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -1100,6 +1083,60 @@ footer {
 
 .social-icon:hover {
     color: var(--secondary-color);
+}
+/* Dark Theme */
+body.theme-dark {
+    background-color: #121212;
+    color: #ffffff;
+}
+body.theme-dark .container {
+    background-color: #1e1e1e;
+}
+body.theme-dark .project-card {
+    background-color: #333;
+    color: #eee;
+}
+
+/* Vibrant Theme */
+body.theme-vibrant {
+    background-color: #fffbf0;
+    color: #2c3e50;
+}
+body.theme-vibrant .container {
+    background-color: #fef9e7;
+}
+body.theme-vibrant .project-card {
+    background-color: #ffeaa7;
+    color: #2d3436;
+}
+body.theme-vibrant .btn {
+    background-color: #fd79a8;
+}
+body.theme-vibrant .btn:hover {
+    background-color: #fab1a0;
+}
+/* Theme Selector Styling */
+#theme-selector {
+    position: fixed;
+    top: 20px;
+    right: 80px;
+    display: flex;
+    gap: 10px;
+    z-index: 1001;
+}
+
+.theme-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    background-color: var(--primary-color);
+    transition: background-color 0.3s ease;
+}
+
+.theme-button:hover {
+    background-color: var(--secondary-color);
 }
 
 }

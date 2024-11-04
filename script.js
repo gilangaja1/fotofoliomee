@@ -666,3 +666,51 @@ const chatbotButton = document.getElementById('chatbotButton');
         // Panggil fungsi langsung untuk menetapkan link aktif saat halaman dimuat
         updateActiveLink();
     });
+
+    // Mode Hari dan Malam Otomatis
+document.addEventListener('DOMContentLoaded', () => {
+    function setAutoMode() {
+        const currentHour = new Date().getHours();
+        const isNight = currentHour >= 18 || currentHour < 6; // Mode malam dari jam 6 sore hingga jam 6 pagi
+        const body = document.body;
+
+        if (isNight) {
+            body.classList.add('dark-mode');
+        } else {
+            body.classList.remove('dark-mode');
+        }
+    }
+
+    // Setel mode saat halaman dimuat
+    setAutoMode();
+
+    // Periksa ulang mode setiap kali halaman dimuat ulang
+    window.addEventListener('focus', setAutoMode);
+});
+
+// Theme Selector Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const themeButtons = document.querySelectorAll('.theme-button');
+    const body = document.body;
+
+    // Fungsi untuk mengubah tema
+    function setTheme(theme) {
+        body.classList.remove('theme-dark', 'theme-vibrant'); // Hapus tema lain yang ada
+        if (theme !== 'default') {
+            body.classList.add(`theme-${theme}`); // Tambahkan tema yang dipilih
+        }
+        localStorage.setItem('portfolioTheme', theme); // Simpan tema ke localStorage
+    }
+
+    // Event listener untuk setiap tombol tema
+    themeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const selectedTheme = button.getAttribute('data-theme');
+            setTheme(selectedTheme);
+        });
+    });
+
+    // Cek tema tersimpan di localStorage
+    const savedTheme = localStorage.getItem('portfolioTheme') || 'default';
+    setTheme(savedTheme); // Setel tema saat halaman dimuat
+});
