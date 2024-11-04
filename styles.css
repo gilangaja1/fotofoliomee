@@ -1138,5 +1138,28 @@ body.theme-vibrant .btn:hover {
 .theme-button:hover {
     background-color: var(--secondary-color);
 }
+/* CSS untuk Posisi dan Gaya Tombol Tema pada Layar Kecil */
+@media (max-width: 768px) {
+    #theme-selector {
+        top: 10px;
+        right: 20px;
+        display: flex;
+        gap: 5px;
+        flex-direction: column; /* Tampilkan vertikal untuk perangkat kecil */
+    }
+
+    .theme-button {
+        padding: 6px 8px;
+        font-size: 14px;
+    }
+}
+#theme-selector {
+    position: fixed;
+    top: 20px;
+    right: 80px;
+    display: flex;
+    gap: 10px;
+    z-index: 2000; /* Pastikan ini lebih tinggi agar tidak tertutupi */
+}
 
 }
