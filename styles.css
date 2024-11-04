@@ -1142,8 +1142,8 @@ body.theme-vibrant .btn:hover {
 #theme-selector {
     position: fixed;
     top: 20px !important;
-    left: 60%;
-    transform: translateX(-50%);
+    left: 47% !important;
+    transform: translateX(-40%);
     display: flex;
     gap: 5px;
     z-index: 2000;
