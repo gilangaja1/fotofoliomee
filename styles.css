@@ -1139,46 +1139,46 @@ body.theme-vibrant .btn:hover {
     background-color: var(--secondary-color);
 }
 /* Theme Selector Styling */
+/* Theme Selector Styling - Centered at Top */
 #theme-selector {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    gap: 10px;
+    gap: 5px;
     z-index: 2000;
-    padding: 5px;
-    background-color: rgba(0, 0, 0, 0.6);
+    padding: 3px 5px;
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 8px;
 }
 
 .theme-button {
-    padding: 8px 12px;
+    padding: 6px 8px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     color: #fff;
     background-color: var(--primary-color);
     transition: background-color 0.3s ease;
-    font-size: 14px;
+    font-size: 12px; /* Ukuran lebih kecil */
 }
 
 .theme-button:hover {
     background-color: var(--secondary-color);
 }
 
-/* Responsive Adjustments */
+/* Responsive Adjustments for Smaller Screens */
 @media (max-width: 768px) {
     #theme-selector {
-        top: 10px;
-        right: 10px;
-        gap: 5px;
-        flex-direction: row;
-        padding: 3px;
+        top: 8px;
+        gap: 3px;
+        padding: 2px 4px;
     }
 
     .theme-button {
-        padding: 6px 8px;
-        font-size: 12px;
+        padding: 5px 7px;
+        font-size: 10px;
     }
 }
 
