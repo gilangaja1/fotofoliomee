@@ -1170,9 +1170,9 @@ body.theme-vibrant .btn:hover {
 /* Responsive Adjustments for Smaller Screens */
 @media (max-width: 768px) {
     #theme-selector {
-        top: 8px;
-        gap: 3px;
-        padding: 2px 4px;
+        top: 15px; /* Sesuaikan nilai ini untuk posisi vertikal di ponsel */
+        left: 60%; /* Pindahkan lebih ke kanan khusus untuk ponsel */
+        transform: translateX(-50%);
     }
 
     .theme-button {
