@@ -1171,7 +1171,7 @@ body.theme-vibrant .btn:hover {
 @media (max-width: 768px) {
     #theme-selector {
         top: 15px; /* Sesuaikan nilai ini untuk posisi vertikal di ponsel */
-        left: 60%; /* Pindahkan lebih ke kanan khusus untuk ponsel */
+        left: 55%; /* Pindahkan lebih ke kanan khusus untuk ponsel */
         transform: translateX(-50%);
     }
 
